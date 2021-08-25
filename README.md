@@ -348,6 +348,40 @@
          	因此在项目中可以将每个.vue文件看成一个具有独立功能的模块，它整合了js代码、html代码和css	样式，当然之前也提到过分离的思想，各有利弊。
          ```
          
+      4. 在项目中使用axios
+      
+         ```markdown
+         # 1. 安装axios
+         	npm install axios --save-dir
+         # 2. 配置main.js引入axios
+         	import axios from 'axios'
+         	Vue.prototype.$http = axios;
+         # 3. 使用axios
+         	在需要发送一步请求的位置：this.$http.get('url').then((res)=>{});
+         # 4. 以上安装和配置我已经在项目中更新过了，所以只关注第三步使用即可
+         ```
+      
+         由于axios要用到后端数据，为了提高开发效率和速度，前后端需要分离，淘宝有一个免费网站[RAP接口管理平台 (taobao.org)](http://rap2.taobao.org/)可以自定义接口和内容，方便前端开发，之后后端开发出类似接口再替换url即可。
+      
+      5. 在项目中使用Element UI
+      
+         ```markdown
+         # 1. 安装Element UI
+         	Element UI就是基于Vue的一个UI框架，提供了各种组件，可以快速开发页面。（自己开发页面真的很累很费时间，借助开源框架可以快速创建出比较好看的界面，当然非常炫酷的组件还是需要DIY的）
+         	执行npm i element-ui -S
+         # 2. 配置main.js引入Element UI
+         	import ElementUI from 'element-ui';
+         	import 'element-ui/lib/theme-chalk/index.css';
+         	Vue.use(ElementUI);
+         # 3. 使用Element UI
+         	具体组件的使用可以查看下面的官方文档，其次我也写了几个基于Element UI设计的界面，也可以参考这开发新页面：
+         	https://element.eleme.cn/#/zh-CN/component/installation
+         # 4. 以上安装和配置我已经在项目中更新过了，所以只关注第三步使用即可
+         ```
+      
+      6. 在项目中使用TailWind CSS
+      
+         这个配置浪费了我两个小时的时间，tailwind主要是将一些常见css封装了起来，可以不写css光使用HTML实现各式各样的样式，但是有了Element UI其实我们也不需要写多少css，甚至不需要写多少html，因此最后我放弃了引入TailWind CSS。（好吧，其实是我配置失败了，就先这样吧，之后要是基础开发结束想试一下tailwind再替换也不迟）
 
 #### 开发软件
 
