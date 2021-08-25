@@ -1,8 +1,8 @@
 /*
  * @Author: hjj 
  * @Date: 2021-08-19 18:39:59 
- * @Last Modified by:   hjj 
- * @Last Modified time: 2021-08-19 18:39:59 
+ * @Last Modified by: hjj
+ * @Last Modified time: 2021-08-24 18:08:17
  */
 <template>
 <div class="mainbody">
@@ -12,7 +12,7 @@
             <form action="#" class="form" id="form1">
                 <h2 class="form__title">Sign Up</h2>
                 <div class="user-box">
-                    <input type="text" name="" required value="">
+                    <input type="text" name="" required value="" v-model="user.name">
                     <label>Username</label>
                 </div>
                 <div class="user-box">
@@ -20,10 +20,10 @@
                     <label>Email</label>
                 </div>
                 <div class="user-box">
-                    <input type="password" name="" required value="">
+                    <input type="password" name="" required value="" v-model="user.key">
                     <label>Password</label>
                 </div>
-                <a href="#">
+                <a @click="addUser">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -49,7 +49,7 @@
                 <a href="#" class="link">Forgot your password?</a>
                 <button class="btn">Sign In</button>    
                 -->
-                <a href="#">
+                <a @click="toURL">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -79,15 +79,34 @@ export default {
   name: 'Login',
   data () {
     return {
-        isOK: false
+        isOK: false,
+        users: [],
+        user: {}
     }
   },
   methods:{
       changeClass: function(){
           this.isOK = !this.isOK;
-          console.log(this.isOK)
+      },
+      toURL: function(){
+          this.$router.push({path: '/main'});
+      },
+      addUser: function(){
+          this.$http.post("http://rap2api.taobao.org/app/mock/289444/user/addNew",this.user).then(res=>{
+              console.log(res);
+              if(res.data.success){
+                  this.$router.push({path: '/main'});
+              }
+          });
       }
-  }
+  },
+  components:{},
+  created(){
+      this.$http.get("http://rap2api.taobao.org/app/mock/289444/user/findAll?page=1&rows=5").then((res)=>{
+          this.users = res.data.results;
+      });
+  },
+  watch:{}
 }
 </script>
 
